@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job HUNR — Career Navigator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-brand">
+            <div class="brand-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6H20" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" />
+                    <path d="M4 12H20" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" />
+                    <path d="M4 18H20" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </div>
+            <span class="brand-name">Job Hunt</span>
+        </div>
+        <nav class="site-nav">
+            <a href="https://www.indeed.com/jobs" target="_blank" class="nav-pill">
+                <span class="icon-uniform">💼</span> Explore
+            </a>
+            <button id="botButton" class="nav-pill">
+                <span class="icon-uniform">🧠</span> Career Prep
+            </button>
+            <a href="https://takeuforward.org/dsa/strivers-sde-sheet-top-coding-interview-problems" target="_blank"
+                class="nav-pill">
+                <span class="icon-uniform">📚</span> Skill Hub
+            </a>
+        </nav>
+        <div class="header-actions">
+            <button id="postJobOpenBtn" class="post-job-btn"><span class="icon-uniform"
+                    style="font-weight: 300;">➕</span> Post Job</button>
+            <button id="loginButton" class="logout-btn"><span class="icon-uniform">👋</span> Sign Out</button>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+
+            <h1>Find Jobs That <span class="text-pink">Fit</span> Your Future</h1>
+            <p class="hero-subtitle">Search roles, sharpen skills, and connect with hiring teams using intelligent career tools.</p>
+            <div class="hero-note-pill">
+                <div class="hero-note-icon-wrap"><span class="icon-uniform hero-note-icon">🚀</span></div>
+                <p>Build your next opportunity with tailored job matches, prep resources, and expert career guidance.
+                </p>
+            </div>
+
+            <section class="search-panel">
+                <div class="search-row">
+                    <label class="search-field">
+                        <div class="input-with-icon">
+                            <span class="search-icon">🔍</span>
+                            <div class="input-group-col">
+                                <span>JOB TITLE, KEYWORD, OR COMPANY</span>
+                                <input id="searchInput" type="text" placeholder="Search roles, skills, or companies">
+                            </div>
+                        </div>
+                    </label>
+                    <div class="divider"></div>
+                    <label class="search-field">
+                        <div class="input-with-icon">
+                            <span class="search-icon text-blue-icon">📍</span>
+                            <div class="input-group-col">
+                                <span>CITY, STATE, OR REMOTE</span>
+                                <input id="locationInput" type="text" placeholder="City, state, or remote">
+                            </div>
+                        </div>
+                    </label>
+                    <div class="divider"></div>
+                    <label class="search-field select-field">
+                        <div class="input-group-col">
+                            <span>ALL CATEGORIES</span>
+                            <select id="categorySelect">
+                                <option>All Categories</option>
+                                <option>Design</option>
+                                <option>Engineering</option>
+                                <option>Marketing</option>
+                                <option>Product</option>
+                            </select>
+                        </div>
+                    </label>
+                    <button id="jobSearchButton" class="search-button">Search Jobs</button>
+                </div>
+            </section>
+
+
+        </div>
+    </main>
+
+    <section class="prep-section">
+        <div class="prep-header">
+            <h2>Career growth tools <span class="text-blue">& preparation</span></h2>
+            <p>From market-ready skills to interview confidence, everything you need to level up your job search.</p>
+        </div>
+        <div class="prep-cards">
+            <a href="https://neetcode.io/roadmap" target="_blank" class="prep-card roadmap-card">
+                <div class="card-icon-wrap"><span class="icon-uniform prep-icon">🧭</span></div>
+                <div class="card-content">
+                    <h3>Career Paths</h3>
+                    <p>Structured guidance for your next career move</p>
+                </div>
+            </a>
+            <a href="https://takeuforward.org/dsa/strivers-sde-sheet-top-coding-interview-problems" target="_blank"
+                class="prep-card dsa-card">
+                <div class="card-icon-wrap"><span class="icon-uniform prep-icon"
+                        style="font-weight: bold; font-family: monospace;">⚡</span></div>
+                <div class="card-content">
+                    <h3>Skill Sheets</h3>
+                    <p>Practical exercises to build technical strength</p>
+                </div>
+            </a>
+            <div class="prep-card company-card" id="openAiRoadmap">
+                <div class="card-icon-wrap"><span class="icon-uniform prep-icon">🎯</span></div>
+                <div class="card-content">
+                    <h3>Interview Ready</h3>
+                    <p>Mock prompts and company-specific insights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="jobs" class="jobs-section">
+        <div class="jobs-header">
+            <div>
+                <h2>Jobs</h2>
+            </div>
+        </div>
+        <div id="jobsList" class="jobs-list">
+            <p class="loading-text">Loading jobs...</p>
+        </div>
+        <p id="noJobsMsg" class="hidden empty-text">No jobs found matching your criteria.</p>
+    </section>
+
+    <div id="loginModal" class="login-modal hidden">
+        <div class="auth-card">
+            <button id="closeLogin" class="close-auth">×</button>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Sign In</button>
+                <button class="auth-tab" data-tab="register">Create Account</button>
+            </div>
+
+            <div class="auth-content">
+                <div class="auth-header">
+                    <h2 id="authTitle"><span class="icon-uniform">🔐</span> Welcome Back</h2>
+                    <p id="authSubtitle">Sign in to manage your job search and saved opportunities.</p>
+                </div>
+
+                <div class="auth-form">
+                    <div class="input-group">
+                        <label class="auth-label">Email address</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉️</span>
+                            <input id="loginEmail" type="email" placeholder="you@example.com">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="auth-label">Password</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔑</span>
+                            <input id="loginPassword" type="password" placeholder="Enter your password">
+                        </div>
+                    </div>
+
+                    <div class="auth-options" id="authOptionsRow">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <button id="authActionBtn" class="auth-submit">Sign In</button>
+
+                    <div id="loginStatus" class="login-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="postJobModal" class="login-modal hidden">
+        <div class="login-card" style="max-height: 90vh; overflow-y: auto;">
+            <div class="login-header">
+                <div>
+                    <h2><span class="login-icon">💼</span>Post a Job</h2>
+                    <p>Add a manual job posting to the system.</p>
+                </div>
+                <button id="closePostJob" class="close-login">×</button>
+            </div>
+            <label class="login-label">Job Title
+                <input id="pjTitle" type="text" placeholder="e.g. Software Engineer" required>
+            </label>
+            <label class="login-label">Company
+                <input id="pjCompany" type="text" placeholder="e.g. Tech Corp" required>
+            </label>
+            <label class="login-label">Location
+                <input id="pjLocation" type="text" placeholder="e.g. Remote" required>
+            </label>
+            <label class="login-label">Salary
+                <input id="pjSalary" type="text" placeholder="e.g. $100k - $120k" required>
+            </label>
+            <label class="login-label">Category
+                <select id="pjCategory"
+                    style="padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); background: rgba(15, 23, 42, 0.95); color: #f8fafc; outline: none; width: 100%;">
+                    <option>Engineering</option>
+                    <option>Design</option>
+                    <option>Product</option>
+                    <option>Marketing</option>
+                    <option>General</option>
+                </select>
+            </label>
+            <label class="login-label">Apply Link
+                <input id="pjLink" type="url" placeholder="https://..." required>
+            </label>
+            <button id="pjSubmitBtn" class="login-submit"
+                style="background: linear-gradient(135deg, #10b981, #059669);">Post Job</button>
+            <div id="pjStatus" class="login-status"></div>
+        </div>
+    </div>
+
+    <div id="chatSidebar" class="chat-sidebar hidden">
+        <div class="chat-header">
+            <div>
+                <h3><span class="icon-uniform">🤖</span>AI Interview Assistant</h3>
+                <p>Get roadmaps, DSA tips, and mock interviews</p>
+            </div>
+            <div class="chat-controls" style="display: flex; gap: 8px; align-items: center;">
+                <button id="clearChatBtn" class="chat-size-btn" title="Clear Chat">🗑</button>
+                <button id="sizeSmallBtn" class="chat-size-btn" title="Small Widget">S</button>
+                <button id="sizeMediumBtn" class="chat-size-btn active" title="Medium Panel">M</button>
+                <button id="sizeLargeBtn" class="chat-size-btn" title="Fullscreen">L</button>
+                <button id="closeChat" class="close-chat" style="margin-left: 8px;">×</button>
+            </div>
+        </div>
+        <div id="chatHistory" class="chat-history">
+            <div class="chat-message bot">
+                <div class="chat-bubble">
+                    Hi! I'm your AI Interview Preparation Assistant. How can I help you today? Try asking for an
+                    "interview roadmap" or "DSA resources".
+                </div>
+            </div>
+        </div>
+        <div id="resumeAttachment" class="resume-attachment hidden">
+            <div class="resume-info">
+                <span class="icon-uniform" style="color: #ef4444;">📄</span>
+                <span id="resumeName" class="resume-name">resume.pdf</span>
+            </div>
+            <button id="removeResume" class="remove-resume">×</button>
+        </div>
+        <div id="stopGeneration" class="stop-generation hidden">
+            <button id="stopGenBtn" class="stop-gen-btn">
+                <span class="icon-uniform">⏹</span> Stop generating
+            </button>
+        </div>
+        <div class="chat-input-area">
+            <label class="upload-btn" title="Upload Resume PDF">
+                <input type="file" id="resumeUpload" accept=".pdf" hidden>
+                <span class="icon-uniform">📎</span>
+            </label>
+            <textarea id="chatInput" placeholder="Type your message..." rows="1"></textarea>
+            <button id="sendChat" class="send-chat"><span class="icon-uniform">➤</span></button>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

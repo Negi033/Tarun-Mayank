@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+sqlalchemy
+bcrypt
+python-multipart
+pypdf
+langchain_groq
+requests
+beautifulsoup4
+python-dotenv
+apscheduler
+PyJWT
