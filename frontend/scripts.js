@@ -1,4 +1,4 @@
-const API_BASE = 'http://127.0.0.1:8000'; // backend server
+const API_BASE = 'https://tarun-mayank-3.onrender.com'; // backend server
 const toggleButton = document.getElementById('toggleFilters');  // store the element in variable
 const advancedFilters = document.getElementById('advancedFilters');
 const loginButton = document.getElementById('loginButton');
