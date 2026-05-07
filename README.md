@@ -1,2 +1,2 @@
 # Tarun-Mayank
-Major Project (Tarun &amp; Mayank
+Major Project (Tarun &amp; Mayank)
