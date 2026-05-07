@@ -241,9 +241,15 @@ async function checkAuthStatus() {
                 }
             } else {
                 localStorage.removeItem('access_token');
+                if (loginButton) {
+                    loginButton.innerHTML = '<span class="icon-uniform">🔐</span>Login';
+                }
             }
         } catch (error) {
             console.error("Auth check failed", error);
+            if (loginButton) {
+                loginButton.innerHTML = '<span class="icon-uniform">🔐</span>Login';
+            }
         }
     }
 }
@@ -711,7 +717,26 @@ if (pjSubmitBtn) {
 }
 
 if (authActionBtn) {
+    authActionBtn.type = 'button';
     authActionBtn.addEventListener('click', handleAuthAction);
+}
+
+if (loginEmail) {
+    loginEmail.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleAuthAction();
+        }
+    });
+}
+
+if (loginPassword) {
+    loginPassword.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleAuthAction();
+        }
+    });
 }
 
 checkAuthStatus();
